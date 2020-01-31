@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
   private Vector3 changeMovement;
   private Rigidbody myRigidbody;
 
+  private bool updatableShield;
+
   [SerializeField]
   private GameObject shield;
   
@@ -19,6 +21,8 @@ public class Player : MonoBehaviour
   void Start()
     {
     myRigidbody = this.GetComponent<Rigidbody>();
+    updatableShield = true;
+    shield.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,9 +34,8 @@ public class Player : MonoBehaviour
       Move();
     }
 
-    if (Input.GetButton("ToggleShield")){
-      toggleShield();
-    }
+    CheckShield();
+
   }
 
     private void GetMovement()
@@ -42,7 +45,12 @@ public class Player : MonoBehaviour
     changeMovement.y = Input.GetAxisRaw("Vertical");
   }
 
-  private void Move()
+  private void CheckShield()
+  { 
+    StartCoroutine("ToggleShieldCo");
+  }
+
+    private void Move()
   {
     changeMovement.Normalize();
     myRigidbody.MovePosition(
@@ -56,8 +64,15 @@ public class Player : MonoBehaviour
     //animator.SetBool("isMoving", true);
   }
 
-  private void toggleShield()
+
+  private IEnumerator ToggleShieldCo()
   {
-    shield.SetActive(shield.activeSelf);
+    if (Input.GetButton("ToggleShield") && updatableShield)
+    {
+      updatableShield = false;
+      shield.SetActive(!shield.activeSelf);
+      yield return new WaitForSeconds(0.25f);
+      updatableShield = true;
+    }
   }
 }
