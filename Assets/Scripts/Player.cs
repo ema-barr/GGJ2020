@@ -7,6 +7,19 @@ public class Player : MonoBehaviour
   private Vector3 changeMovement;
   private Rigidbody myRigidbody;
 
+  private bool updatableShield;
+  private bool isRepairing;
+
+  [SerializeField]
+  private FloatValue playerHealth;
+  [SerializeField]
+  private Signal playerHealthSignal;
+  [SerializeField]
+  private Signal shieldHealthSignal;
+
+  [SerializeField]
+  private FloatValue shieldHealth;
+
   [SerializeField]
   private GameObject shield;
   
@@ -18,7 +31,12 @@ public class Player : MonoBehaviour
   // Start is called before the first frame update
   void Start()
     {
+    playerHealth.currentValue = playerHealth.initialValue;
+    playerHealthSignal.Raise();
+
     myRigidbody = this.GetComponent<Rigidbody>();
+    updatableShield = true;
+    shield.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,8 +48,11 @@ public class Player : MonoBehaviour
       Move();
     }
 
-    if (Input.GetButton("ToggleShield")){
-      toggleShield();
+    CheckShield();
+
+    if (Input.GetKeyDown("v"))
+    {
+      TakeDamage(1);
     }
   }
 
@@ -42,7 +63,12 @@ public class Player : MonoBehaviour
     changeMovement.y = Input.GetAxisRaw("Vertical");
   }
 
-  private void Move()
+  private void CheckShield()
+  { 
+    StartCoroutine("ToggleShieldCo");
+  }
+
+    private void Move()
   {
     changeMovement.Normalize();
     myRigidbody.MovePosition(
@@ -56,8 +82,40 @@ public class Player : MonoBehaviour
     //animator.SetBool("isMoving", true);
   }
 
-  private void toggleShield()
+
+  private IEnumerator ToggleShieldCo()
   {
-    shield.SetActive(shield.activeSelf);
+    if (Input.GetButton("ToggleShield") && updatableShield)
+    {
+      updatableShield = false;
+      shield.SetActive(!shield.activeSelf);
+      isRepairing = shield.activeSelf;
+      yield return new WaitForSeconds(0.25f);
+      updatableShield = true;
+    }
+  }
+
+  public void TakeDamage(float damage)
+  {
+    if (shieldHealth.currentValue <= 0 || !isRepairing)
+    {
+      playerHealth.currentValue -= damage;
+      playerHealthSignal.Raise();
+      //CheckDeath();
+    }
+    else
+    {
+      shieldHealth.currentValue -= damage;
+      shieldHealthSignal.Raise();
+      if (shieldHealth.currentValue <= 0)
+      {
+        updatableShield = false;
+        shield.SetActive(false);
+      }
+    }
+
+    print("Shield: " + shieldHealth.currentValue);
+    print("Health: " + playerHealth.currentValue);
+
   }
 }
