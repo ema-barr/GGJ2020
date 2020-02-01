@@ -69,6 +69,11 @@ public class BulletScript : MonoBehaviour
       other.GetComponentInParent<Player>().TakeDamage(1);
       Destroy(this.gameObject);
     }
+    else if (other.CompareTag("Enemy"))
+    {
+      other.GetComponent<EnemyScript>().TakeDamage(1);
+      Destroy(this.gameObject);
+    }
     else if (other.CompareTag("Shield"))
     {
       if (other.GetComponentInParent<Player>().isParrying)

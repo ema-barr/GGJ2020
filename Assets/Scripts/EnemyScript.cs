@@ -4,27 +4,50 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    public GameObject bullet;
-    private Transform EnTrans;
+  public GameObject bullet;
+  [SerializeField]
+  private GameObject exitPoint;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        EnTrans = GetComponent<Transform>();
-        Debug.Log(EnTrans.position);
-    }
+  [SerializeField]
+  private int health;
+  [SerializeField]
+  private Signal enemyHealthSignal;
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*if (Input.GetKeyDown("space"))
-        {
-            Instantiate(bullet,EnTrans);
-        }*/
-    }
 
-    public void Attack()
+  // Start is called before the first frame update
+  void Start()
   {
-    Instantiate(bullet, EnTrans);
+    Debug.Log(exitPoint.transform.position);
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    /*if (Input.GetKeyDown("space"))
+    {
+        Instantiate(bullet,EnTrans);
+    }*/
+  }
+
+  public void TakeDamage(int damage)
+  {
+    print("Enemy: " + health);
+    health -= damage;
+    if (health <= 0)
+    {
+      Death();
+
+    }
+  }
+
+  private void Death()
+  {
+    GetComponentInParent<WaveAttack>().RemoveEnemy(this.gameObject);
+    Destroy(this.gameObject);
+  }
+
+  public void Attack()
+  {
+    Instantiate(bullet, exitPoint.transform);
   }
 }

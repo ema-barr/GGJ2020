@@ -6,36 +6,73 @@ public class WaveAttack : MonoBehaviour
 {
 
   [SerializeField]
+  private List<GameObject> spawnPoints;
   private List<GameObject> enemies;
 
   [SerializeField]
   private float timeDelay;
+  [SerializeField]
+  private GameObject enemyPrefab;
+
+  [SerializeField]
+  private int numEnemies;
+
+  private int activeEnemies;
 
   private bool attackAvailable;
 
 
+
+
   // Start is called before the first frame update
   void Start()
-    {
-    attackAvailable = true;
-    }
+  {
+    attackAvailable = false;
+    StartCoroutine("InitializationCo");
+  }
 
-    // Update is called once per frame
-    void Update()
+  private IEnumerator InitializationCo()
+  {
+    activeEnemies = Mathf.Min(numEnemies, spawnPoints.Count);
+    enemies = new List<GameObject>();
+    for (int i = 0; i < activeEnemies; i++)
     {
+      GameObject enemy = (GameObject)Instantiate(enemyPrefab, spawnPoints[i].transform);
+      enemies.Add(enemy);
+    }
+    attackAvailable = true;
+    yield return null;
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+
     if (attackAvailable)
     {
       StartCoroutine("AttackCo");
     }
-    }
+  }
 
-    private IEnumerator AttackCo()
+  private IEnumerator AttackCo()
   {
     attackAvailable = false;
-    int nEnemies = enemies.Count;
-    int index = Random.Range(0, nEnemies);
+    activeEnemies = enemies.Count;
+    int index = Random.Range(0, activeEnemies);
+    print(index);
     enemies[index].GetComponent<EnemyScript>().Attack();
     yield return new WaitForSeconds(timeDelay * Time.deltaTime);
     attackAvailable = true;
+  }
+
+  public void RemoveEnemy(GameObject enemy)
+  {
+    enemies.Remove(enemy);
+    if (enemies.Count == 0)
+    {
+      StopCoroutine("AttackCo");
+      print("Win");
+      attackAvailable = false;
+    }
   }
 }
