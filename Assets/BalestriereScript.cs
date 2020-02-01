@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class BalestriereScript : MonoBehaviour
 {
   private Vector3 changeMovement;
   private Rigidbody2D myRigidbody;
@@ -26,8 +26,6 @@ public class BulletScript : MonoBehaviour
     myRigidbody = this.GetComponent<Rigidbody2D>();
     direction = 1;
 
-        //DO SHIT HERE, FOR FUCK SAKE
-        //damage = 
     Destroy(gameObject, delayKillBullet);
   }
 
@@ -47,7 +45,7 @@ public class BulletScript : MonoBehaviour
   {
 
         //look at *target(
-                //vector forward
+        //vector forward
     changeMovement = Vector3.zero;
     changeMovement.x = 1; // Input.GetAxisRaw("Horizontal");
     changeMovement.y = 0; // Input.GetAxisRaw("Vertical");
