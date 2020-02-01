@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - Shield
   - Enemy
+  - Villager
   layers:
   - Default
   - TransparentFX
