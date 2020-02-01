@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
   private Vector3 changeMovement;
-  private Rigidbody myRigidbody;
+  private Rigidbody2D myRigidbody;
 
   private bool updatableShield;
   private bool isRepairing;
@@ -34,13 +34,13 @@ public class Player : MonoBehaviour
     playerHealth.currentValue = playerHealth.initialValue;
     playerHealthSignal.Raise();
 
-    myRigidbody = this.GetComponent<Rigidbody>();
+    myRigidbody = this.GetComponent<Rigidbody2D>();
     updatableShield = true;
     shield.SetActive(false);
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
       GetMovement();
     if (changeMovement != Vector3.zero)
@@ -54,7 +54,9 @@ public class Player : MonoBehaviour
     {
       TakeDamage(1);
     }
+
   }
+
 
     private void GetMovement()
   {
@@ -85,7 +87,7 @@ public class Player : MonoBehaviour
 
   private IEnumerator ToggleShieldCo()
   {
-    if (Input.GetButton("ToggleShield") && updatableShield)
+    if (Input.GetKey("z") && updatableShield)
     {
       updatableShield = false;
       shield.SetActive(!shield.activeSelf);

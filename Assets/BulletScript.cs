@@ -14,6 +14,7 @@ public class BulletScript : MonoBehaviour
     private float delayKillBullet = 1f;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,4 +55,22 @@ public class BulletScript : MonoBehaviour
         //animator.SetFloat("moveY", changeMovement.y);
         //animator.SetBool("isMoving", true);
     }
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.CompareTag("Player"))
+    {
+      other.GetComponentInParent<Player>().TakeDamage(1);
+      Destroy(this.gameObject);
+    }
+    if (other.CompareTag("Shield"))
+    {
+      print("Nulla");
+      Vector2 forceVec = -myRigidbody.velocity.normalized * speed;
+      myRigidbody.AddForce(forceVec, ForceMode2D.Impulse);
+    }
+  }
+
+
+
 }
