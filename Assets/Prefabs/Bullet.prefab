@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 577fcc0600c15c343bc88f87b731c578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   speed: 15
   delayKillBullet: 20
 --- !u!50 &5672781261292587106
@@ -68,7 +69,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1024402039149729315
 BoxCollider2D:
   m_ObjectHideFlags: 0

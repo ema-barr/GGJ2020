@@ -19,6 +19,12 @@ public class WaveAttack : MonoBehaviour
 
   private int activeEnemies;
 
+  [SerializeField]
+  private Signal initializationEnemiesSignal;
+
+  [SerializeField]
+  private ListGameObjects listVillagers;
+
   private bool attackAvailable;
 
 
@@ -40,7 +46,7 @@ public class WaveAttack : MonoBehaviour
       GameObject enemy = (GameObject)Instantiate(enemyPrefab, spawnPoints[i].transform);
       enemies.Add(enemy);
     }
-    attackAvailable = true;
+    initializationEnemiesSignal.Raise();
     yield return null;
   }
 
@@ -60,8 +66,13 @@ public class WaveAttack : MonoBehaviour
     activeEnemies = enemies.Count;
     int index = Random.Range(0, activeEnemies);
     print(index);
-    enemies[index].GetComponent<EnemyScript>().Attack();
-    yield return new WaitForSeconds(timeDelay * Time.deltaTime);
+    if (listVillagers.list.Count > 0)
+    {
+      int indexVillAttack = Mathf.Min(index, listVillagers.list.Count - 1);
+      enemies[index].GetComponent<EnemyScript>().Attack(listVillagers.list[indexVillAttack]);
+      yield return new WaitForSeconds(timeDelay * Time.deltaTime);
+
+    }
     attackAvailable = true;
   }
 
@@ -74,5 +85,10 @@ public class WaveAttack : MonoBehaviour
       print("Win");
       attackAvailable = false;
     }
+  }
+
+  public void InitializationComplete()
+  {
+    attackAvailable = true;
   }
 }

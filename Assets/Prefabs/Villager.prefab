@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1664146150386735290}
   - component: {fileID: 1664146150386735291}
   m_Layer: 0
-  m_Name: Villager 1
+  m_Name: Villager
   m_TagString: Villager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664146150386735288}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.94, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1664146150775973676}
@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHealth: 1
+  villagerDeath: {fileID: 11400000, guid: d3c3da3d45b3347ecbf33c1b94da7607, type: 2}
+  villagerToRem: {fileID: 11400000, guid: a531c5e78bcc247a39b4a492be7cbffe, type: 2}
 --- !u!61 &1664146150386735291
 BoxCollider2D:
   m_ObjectHideFlags: 0

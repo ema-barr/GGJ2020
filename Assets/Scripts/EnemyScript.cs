@@ -14,6 +14,7 @@ public class EnemyScript : MonoBehaviour
   private Signal enemyHealthSignal;
 
 
+
   // Start is called before the first frame update
   void Start()
   {
@@ -46,8 +47,10 @@ public class EnemyScript : MonoBehaviour
     Destroy(this.gameObject);
   }
 
-  public void Attack()
+  public void Attack(GameObject target)
   {
-    Instantiate(bullet, exitPoint.transform);
+    print("Target" + target);
+    GameObject bullObj = Instantiate(bullet, exitPoint.transform);
+    bullObj.GetComponent<BulletScript>().SetTarget(target);
   }
 }

@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6852959136643090485}
   - component: {fileID: 6852959136643090486}
+  - component: {fileID: 3471957806322591708}
   m_Layer: 0
   m_Name: VillagersManager
   m_TagString: Untagged
@@ -84,9 +85,40 @@ MonoBehaviour:
   - {fileID: 6852959137050705000}
   - {fileID: 6852959136799180687}
   - {fileID: 6852959137737197431}
+  villagers: {fileID: 11400000, guid: d1987a30c3a1d42a08da22f7ff4e60e5, type: 2}
   numVillagers: 5
   villagerPrefab: {fileID: 1664146150386735288, guid: b320b3c72db57403ebe225dcbe11d288,
     type: 3}
+  villToRem: {fileID: 11400000, guid: a531c5e78bcc247a39b4a492be7cbffe, type: 2}
+--- !u!114 &3471957806322591708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6852959136643090484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c314fd7deac1a401ebee708eb8403ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: d3c3da3d45b3347ecbf33c1b94da7607, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6852959136643090486}
+        m_MethodName: RemoveVillagerFromList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &6852959136799180687
 GameObject:
   m_ObjectHideFlags: 0

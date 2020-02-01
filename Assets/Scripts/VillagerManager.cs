@@ -6,14 +6,21 @@ public class VillagerManager : MonoBehaviour
 {
   [SerializeField]
   private List<GameObject> spawnPoints;
-  private List<GameObject> villagers;
+  [SerializeField]
+  public ListGameObjects villagers;
 
   [SerializeField]
   private int numVillagers;
   [SerializeField]
   private GameObject villagerPrefab;
 
+  [SerializeField]
+  private ElementToRem villToRem;
+
   private int activeVillagers;
+
+  [SerializeField]
+  private Signal initializationSignal;
 
 
   // Start is called before the first frame update
@@ -32,12 +39,18 @@ public class VillagerManager : MonoBehaviour
   private IEnumerator InitializationCo()
   {
     activeVillagers = Mathf.Min(numVillagers, spawnPoints.Count);
-    villagers = new List<GameObject>();
     for (int i = 0; i < activeVillagers; i++)
     {
-      GameObject enemy = (GameObject)Instantiate(villagerPrefab, spawnPoints[i].transform);
-      villagers.Add(enemy);
+      GameObject vill = (GameObject)Instantiate(villagerPrefab, spawnPoints[i].transform);
+      villagers.list.Add(vill);
     }
+    initializationSignal.Raise();
     yield return null;
   }
+
+  public void RemoveVillagerFromList()
+  {
+    villagers.list.Remove(villToRem.go);
+  }
+
 }
