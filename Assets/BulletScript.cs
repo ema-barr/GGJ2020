@@ -86,6 +86,11 @@ public class BulletScript : MonoBehaviour
       }
 
     }
+    else if (other.CompareTag("Villager"))
+        {
+            other.GetComponentInParent<VillagerScript>().TakeDamage(damage);
+            Destroy(this.gameObject);
+        }
   }
 
 
