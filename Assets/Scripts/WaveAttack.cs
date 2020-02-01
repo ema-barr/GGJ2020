@@ -12,7 +12,7 @@ public class WaveAttack : MonoBehaviour
   [SerializeField]
   private float timeDelay;
   [SerializeField]
-  private GameObject enemyPrefab;
+  private GameObject[] enemyPrefabs;
 
   [SerializeField]
   private int numEnemies;
@@ -43,7 +43,7 @@ public class WaveAttack : MonoBehaviour
     enemies = new List<GameObject>();
     for (int i = 0; i < activeEnemies; i++)
     {
-      GameObject enemy = (GameObject)Instantiate(enemyPrefab, spawnPoints[i].transform);
+      GameObject enemy = (GameObject)Instantiate(enemyPrefabs[i], spawnPoints[i].transform);
       enemies.Add(enemy);
     }
     initializationEnemiesSignal.Raise();
@@ -68,8 +68,18 @@ public class WaveAttack : MonoBehaviour
     print(index);
     if (listVillagers.list.Count > 0)
     {
-      int indexVillAttack = Mathf.Min(index, listVillagers.list.Count - 1);
-      enemies[index].GetComponent<EnemyScript>().Attack(listVillagers.list[indexVillAttack]);
+      int indexVillAttack = -1;
+      if (enemies[index].GetComponent<Crossbowman>() != null)
+      {
+        indexVillAttack = Random.Range(0, listVillagers.list.Count - 1);
+        enemies[index].GetComponent<Crossbowman>().Attack(listVillagers.list[indexVillAttack]);
+      }
+      else
+      {
+        indexVillAttack = Mathf.Min(index, listVillagers.list.Count - 1);
+        enemies[index].GetComponent<EnemyScript>().Attack(listVillagers.list[indexVillAttack]);
+      }
+
       yield return new WaitForSeconds(timeDelay * Time.deltaTime);
 
     }

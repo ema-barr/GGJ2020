@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class Crossbowman : MonoBehaviour
 {
   public GameObject bullet;
   [SerializeField]
@@ -51,4 +51,7 @@ public class EnemyScript : MonoBehaviour
     GameObject bullObj = Instantiate(bullet, exitPoint.transform);
     bullObj.GetComponent<BulletScript>().SetTarget(target);
   }
+
+
+
 }

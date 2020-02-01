@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 2853198996764918616}
   - component: {fileID: 8011224224283065446}
   - component: {fileID: 3432650317639426599}
-  - component: {fileID: 7062156365503657489}
   m_Layer: 0
-  m_Name: BulletBalestra
+  m_Name: BulletCrossbow
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  speed: 10
+  speed: 20
   delayKillBullet: 20
+  target: {fileID: 0}
 --- !u!50 &8011224224283065446
 Rigidbody2D:
   serializedVersion: 4
@@ -97,21 +97,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5061916, y: 0.20769829}
   m_EdgeRadius: 0
---- !u!114 &7062156365503657489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2853198996764918617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04c1101cd0e9275408eb4cb796d541d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  speed: 1
-  delayKillBullet: 1
 --- !u!1 &6803271051082619928
 GameObject:
   m_ObjectHideFlags: 0
