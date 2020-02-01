@@ -7,6 +7,8 @@ public class BulletScript : MonoBehaviour
     private Vector3 changeMovement;
     private Rigidbody2D myRigidbody;
 
+    private int direction;
+
 
     [SerializeField]
     private float speed = 1f;
@@ -19,6 +21,7 @@ public class BulletScript : MonoBehaviour
     void Start()
     {
         myRigidbody = this.GetComponent<Rigidbody2D>();
+        direction = 1;
 
         Destroy(gameObject, delayKillBullet);
     }
@@ -46,7 +49,7 @@ public class BulletScript : MonoBehaviour
     {
         changeMovement.Normalize();
         myRigidbody.MovePosition(
-                transform.position + changeMovement * speed * Time.deltaTime);
+                transform.position + changeMovement * speed * direction * Time.deltaTime);
 
         //Play Animation
         changeMovement.x = Mathf.Round(changeMovement.x);
@@ -62,12 +65,9 @@ public class BulletScript : MonoBehaviour
     {
       other.GetComponentInParent<Player>().TakeDamage(1);
       Destroy(this.gameObject);
-    }
-    if (other.CompareTag("Shield"))
+    } else if (other.CompareTag("Shield"))
     {
-      print("Nulla");
-      Vector2 forceVec = -myRigidbody.velocity.normalized * speed;
-      myRigidbody.AddForce(forceVec, ForceMode2D.Impulse);
+      direction = -1;
     }
   }
 
