@@ -20,11 +20,40 @@ public class Player : MonoBehaviour
   [SerializeField]
   private FloatValue shieldHealth;
 
-  [SerializeField]
-  private GameObject shield;
+    [SerializeField]
+    private GameObject shield;
+    [SerializeField]
+  private Sprite shieldParry;
+    [SerializeField]
+    private Sprite shieldParryBroken;
+    [SerializeField]
+    private Sprite shieldParryDestroyed;
+
+//there's no art for this
+    [SerializeField]
+    private Sprite shieldCharging;
+    //there's no art for this
+    [SerializeField]
+    private Sprite shieldChargingBroken;
+    //there's no art for this
+    [SerializeField]
+    private Sprite shieldChargingDestroyed;
+
+    [SerializeField]
+    private Sprite shieldRebound;
+    [SerializeField]
+    private Sprite shieldReboundBroken;
+    [SerializeField]
+    private Sprite shieldReboundDestroyed;
+    [SerializeField]
+    private Sprite shieldRest;
+    [SerializeField]
+    private Sprite shieldRestBroken;
+    [SerializeField]
+    private Sprite shieldRestDestroyed;
 
 
-  [SerializeField]
+    [SerializeField]
   private float delayStartParry;
   [SerializeField]
   private float durationParry;
@@ -37,6 +66,8 @@ public class Player : MonoBehaviour
   [SerializeField]
   private float speed = 0f;
 
+  private SpriteRenderer shieldSprite;
+
 
   // Start is called before the first frame update
   void Start()
@@ -45,10 +76,14 @@ public class Player : MonoBehaviour
     playerHealthSignal.Raise();
 
     myRigidbody = this.GetComponent<Rigidbody2D>();
-    updatableShield = true;
+
+    shieldSprite = GetComponentInChildren<SpriteRenderer>();
+
+        updatableShield = true;
     isParrying = false;
     parryReady = true;
-  }
+        ChangeShieldSprite(shieldRest);
+    }
 
   // Update is called once per frame
   void Update()
@@ -59,7 +94,7 @@ public class Player : MonoBehaviour
       Move();
     }
 
-    if (Input.GetKey("z") && parryReady)
+    if (Input.GetKey("space") && parryReady)
     {
       StartCoroutine("ParryCo");
     }
@@ -73,18 +108,29 @@ public class Player : MonoBehaviour
     if (!isParrying)
     {
       parryReady = false;
-      yield return new WaitForSeconds(delayStartParry);
+            //Rebound (should be "Charging", but ain't got no art for that) shield sprite che ho commentato perche sti cazzi
+//            ChangeShieldSprite(shieldRebound);
+
+            yield return new WaitForSeconds(delayStartParry);
       print("Start parry");
       isParrying = true;
+            //Parrying shield sprite
+            ChangeShieldSprite(shieldParry);
+
       yield return new WaitForSeconds(durationParry);
       isParrying = false;
-      print("End parry");
+            //Rebound shield sprite che ho commentato perche sti cazzi
+//            ChangeShieldSprite(shieldRebound);
+
+            print("End parry");
       yield return new WaitForSeconds(recoveryParry);
       parryReady = true;
+            //resting shield sprite
+            ChangeShieldSprite(shieldRest);
+
+        }
 
     }
-
-  }
 
 
   private void GetMovement()
@@ -168,4 +214,18 @@ public class Player : MonoBehaviour
 
   }
 
+    public void ChangeShieldSprite(Sprite sprite)
+    {
+        shieldSprite.sprite = sprite;
+        if (sprite == shieldRest || sprite == shieldRestBroken || sprite == shieldRestDestroyed)
+        {
+            shieldSprite.sortingOrder = -1;
+        }
+        if (sprite == shieldParry || sprite == shieldRebound || sprite == shieldParryBroken || sprite == shieldParryDestroyed || sprite == shieldReboundBroken || sprite == shieldReboundDestroyed)
+        {
+            shieldSprite.sortingOrder = 1;
+        }
+
+
+    }
 }

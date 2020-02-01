@@ -64,6 +64,7 @@ public class BulletScript : MonoBehaviour
 
   private void OnTriggerEnter2D(Collider2D other)
   {
+        transform.rotation = Quaternion.AngleAxis(0, Vector3.back); ;
     if (other.CompareTag("Player"))
     {
       other.GetComponentInParent<Player>().TakeDamage(1);
