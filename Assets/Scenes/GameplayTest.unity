@@ -574,6 +574,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d1987a30c3a1d42a08da22f7ff4e60e5,
         type: 2}
+    - target: {fileID: 33231814221575825, guid: af00cc286fed24dbdb2b6e03303abd23,
+        type: 3}
+      propertyPath: numEnemies
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af00cc286fed24dbdb2b6e03303abd23, type: 3}
 --- !u!1001 &3613249813330496615
@@ -646,17 +651,17 @@ PrefabInstance:
     - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
         type: 3}
       propertyPath: durationParry
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
         type: 3}
       propertyPath: delayStartParry
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
         type: 3}
       propertyPath: recoveryParry
-      value: 0.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3613249814366771323, guid: 24510f702aff74910837200610079208,
         type: 3}

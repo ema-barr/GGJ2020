@@ -11,7 +11,6 @@ public class BulletScript : MonoBehaviour
   [SerializeField]
   private int damage = 1;
 
-  private int directionSign;
 
 
   [SerializeField]
@@ -29,7 +28,6 @@ public class BulletScript : MonoBehaviour
   void Start()
   {
     myRigidbody = this.GetComponent<Rigidbody2D>();
-    directionSign = 1;
 
     //DO SHIT HERE, FOR FUCK SAKE
     //damage = 
@@ -64,20 +62,6 @@ public class BulletScript : MonoBehaviour
 
   }
 
-  private void Move()
-  {
-    changeMovement.Normalize();
-    myRigidbody.MovePosition(
-            transform.position + changeMovement * speed * directionSign * Time.deltaTime);
-
-    //Play Animation
-    changeMovement.x = Mathf.Round(changeMovement.x);
-    changeMovement.y = Mathf.Round(changeMovement.y);
-    //animator.SetFloat("moveX", changeMovement.x);
-    //animator.SetFloat("moveY", changeMovement.y);
-    //animator.SetBool("isMoving", true);
-  }
-
   private void OnTriggerEnter2D(Collider2D other)
   {
     if (other.CompareTag("Player"))
@@ -93,7 +77,7 @@ public class BulletScript : MonoBehaviour
     else if (other.CompareTag("Shield"))
     {
       if (other.GetComponentInParent<Player>().isParrying)
-        directionSign = -1;
+        direction = transform.position - target.transform.position;
       else
       {
         other.GetComponentInParent<Player>().TakeDamage(damage);
