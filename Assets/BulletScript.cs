@@ -26,6 +26,7 @@ public class BulletScript : MonoBehaviour
     myRigidbody = this.GetComponent<Rigidbody2D>();
     direction = 1;
 
+
     Destroy(gameObject, delayKillBullet);
   }
 
