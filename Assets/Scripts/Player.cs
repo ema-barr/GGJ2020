@@ -22,7 +22,17 @@ public class Player : MonoBehaviour
 
   [SerializeField]
   private GameObject shield;
-  
+
+
+  [SerializeField]
+  private float delayStartParry;
+  [SerializeField]
+  private float durationParry;
+  [SerializeField]
+  private float recoveryParry;
+
+  public bool isParrying;
+  public bool parryReady;
 
   [SerializeField]
   private float speed = 0f;
@@ -30,47 +40,66 @@ public class Player : MonoBehaviour
 
   // Start is called before the first frame update
   void Start()
-    {
+  {
     playerHealth.currentValue = playerHealth.initialValue;
     playerHealthSignal.Raise();
 
     myRigidbody = this.GetComponent<Rigidbody2D>();
     updatableShield = true;
-    shield.SetActive(false);
-    }
+    isParrying = false;
+    parryReady = true;
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-      GetMovement();
+  // Update is called once per frame
+  void Update()
+  {
+    GetMovement();
     if (changeMovement != Vector3.zero)
     {
       Move();
     }
 
-    CheckShield();
-
-    if (Input.GetKeyDown("v"))
+    if (Input.GetKey("z") && parryReady)
     {
-      TakeDamage(1);
+      StartCoroutine("ParryCo");
     }
 
   }
 
 
-    private void GetMovement()
+  private IEnumerator ParryCo()
+  {
+    print("Parrying");
+    if (!isParrying)
+    {
+      parryReady = false;
+      yield return new WaitForSeconds(delayStartParry);
+      print("Start parry");
+      isParrying = true;
+      yield return new WaitForSeconds(durationParry);
+      isParrying = false;
+      print("End parry");
+      yield return new WaitForSeconds(recoveryParry);
+      parryReady = true;
+
+    }
+
+  }
+
+
+  private void GetMovement()
   {
     changeMovement = Vector3.zero;
-    changeMovement.x = Input.GetAxisRaw("Horizontal");
+    //changeMovement.x = Input.GetAxisRaw("Horizontal");
     changeMovement.y = Input.GetAxisRaw("Vertical");
   }
 
   private void CheckShield()
-  { 
+  {
     StartCoroutine("ToggleShieldCo");
   }
 
-    private void Move()
+  private void Move()
   {
     changeMovement.Normalize();
     myRigidbody.MovePosition(
@@ -85,7 +114,7 @@ public class Player : MonoBehaviour
   }
 
 
-  private IEnumerator ToggleShieldCo()
+  /*private IEnumerator ToggleShieldCo()
   {
     if (Input.GetKey("z") && updatableShield)
     {
@@ -95,29 +124,48 @@ public class Player : MonoBehaviour
       yield return new WaitForSeconds(0.25f);
       updatableShield = true;
     }
-  }
+  }*/
 
   public void TakeDamage(float damage)
   {
-    if (shieldHealth.currentValue <= 0 || !isRepairing)
+    if (!parryReady)
     {
-      playerHealth.currentValue -= damage;
-      playerHealthSignal.Raise();
-      //CheckDeath();
+      //I'm parrying or my shield is broken
+      if (!isParrying)
+      {
+        //My parry is not good
+        playerHealth.currentValue -= damage;
+        playerHealthSignal.Raise();
+      }
     }
     else
     {
-      shieldHealth.currentValue -= damage;
-      shieldHealthSignal.Raise();
+      //I'm not parrying
       if (shieldHealth.currentValue <= 0)
       {
-        updatableShield = false;
-        shield.SetActive(false);
+        //I have no shield
+        playerHealth.currentValue -= damage;
+        playerHealthSignal.Raise();
+        //CheckDeath();
       }
+      else if (shieldHealth.currentValue > 0)
+      {
+        //I'm defending only with my shield
+        shieldHealth.currentValue -= damage;
+        shieldHealthSignal.Raise();
+        if (shieldHealth.currentValue <= 0)
+        {
+          updatableShield = false;
+          shield.SetActive(false);
+          parryReady = false;
+        }
+      }
+
     }
 
     print("Shield: " + shieldHealth.currentValue);
     print("Health: " + playerHealth.currentValue);
 
   }
+
 }
