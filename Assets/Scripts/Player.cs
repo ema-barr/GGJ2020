@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -211,6 +212,10 @@ public class Player : MonoBehaviour
 
     print("Shield: " + shieldHealth.currentValue);
     print("Health: " + playerHealth.currentValue);
+        if (playerHealth.currentValue <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
 
   }
 
