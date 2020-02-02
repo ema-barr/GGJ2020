@@ -221,12 +221,65 @@ public class Player : MonoBehaviour
 
     public void ChangeShieldSprite(Sprite sprite)
     {
-        shieldSprite.sprite = sprite;
+
+        if (sprite == shieldRest) {
+            if (shieldHealth.currentValue/shieldHealth.initialValue > 0.75)
+            {
+                shieldSprite.sprite = shieldRest;
+            }
+            else if (shieldHealth.currentValue / shieldHealth.initialValue > 0.30)
+            {
+                shieldSprite.sprite = shieldRestBroken;
+            }
+            else
+            {
+                shieldSprite.sprite = shieldRestDestroyed;
+            }
+        }
+        else if (sprite == shieldParry)
+        {
+            if (shieldHealth.currentValue / shieldHealth.initialValue > 0.75)
+            {
+                shieldSprite.sprite = shieldParry;
+            }
+            else if (shieldHealth.currentValue / shieldHealth.initialValue > 0.30)
+            {
+                shieldSprite.sprite = shieldParryBroken;
+            }
+            else
+            {
+                shieldSprite.sprite = shieldParryDestroyed;
+            }
+        }
+        else if (sprite == shieldRebound)
+        {
+            if (shieldHealth.currentValue / shieldHealth.initialValue > 0.75)
+            {
+                shieldSprite.sprite = shieldRebound;
+            }
+            else if (shieldHealth.currentValue / shieldHealth.initialValue > 0.30)
+            {
+                shieldSprite.sprite = shieldReboundBroken;
+            }
+            else
+            {
+                shieldSprite.sprite = shieldReboundDestroyed;
+            }
+        }
+
+        else if (sprite == shieldParry) { }
+
+        else if (sprite == shieldRebound) { }
+
+        
+
+
+//        shieldSprite.sprite = sprite;
         if (sprite == shieldRest || sprite == shieldRestBroken || sprite == shieldRestDestroyed)
         {
             shieldSprite.sortingOrder = -1;
         }
-        if (sprite == shieldParry || sprite == shieldRebound || sprite == shieldParryBroken || sprite == shieldParryDestroyed || sprite == shieldReboundBroken || sprite == shieldReboundDestroyed)
+        else if (sprite == shieldParry || sprite == shieldRebound || sprite == shieldParryBroken || sprite == shieldParryDestroyed || sprite == shieldReboundBroken || sprite == shieldReboundDestroyed)
         {
             shieldSprite.sortingOrder = 1;
         }
