@@ -68,7 +68,7 @@ public class GameManagerScript : MonoBehaviour
 
   public void OnGameOverSignal()
   {
-    //Time.timeScale = 0f;
+    Time.timeScale = 0f;
     panelGameOver.SetActive(true);
     player.GetComponent<Player>().FullHealth();
     player.GetComponent<Player>().FullShield();
