@@ -60,11 +60,11 @@ public class WaveAttack : MonoBehaviour
     {
       //StartCoroutine("AttackCo2");
       attackAvailable = false;
-      StartCoroutine("Attack3");
+      StartCoroutine("AttackCo");
     }
   }
 
-  private IEnumerator Attack3()
+  private IEnumerator AttackCo()
   {
 
     int index = Random.Range(0, enemies.Count);
@@ -97,39 +97,12 @@ public class WaveAttack : MonoBehaviour
 
   }
 
-  /*
-    private IEnumerator AttackCo()
-    {
-      attackAvailable = false;
-      activeEnemies = enemies.Count;
-      int index = Random.Range(0, activeEnemies);
-      print(index);
-      if (listVillagers.list.Count > 0)
-      {
-        int indexVillAttack = -1;
-        if (enemies[index].GetComponent<Crossbowman>() != null)
-        {
-          indexVillAttack = Random.Range(0, listVillagers.list.Count - 1);
-          enemies[index].GetComponent<Crossbowman>().Attack(listVillagers.list[indexVillAttack]);
-        }
-        else
-        {
-          indexVillAttack = Mathf.Min(index, listVillagers.list.Count - 1);
-          enemies[index].GetComponent<EnemyScript>().Attack(listVillagers.list[indexVillAttack]);
-        }
-
-        yield return new WaitForSeconds(timeDelay * Time.deltaTime);
-
-      }
-      attackAvailable = true;
-    }*/
-
   public void RemoveEnemy(GameObject enemy)
   {
     enemies.Remove(enemy);
     if (enemies.Count == 0)
     {
-      StopCoroutine("Attack3");
+      StopCoroutine("AttackCo");
       print("Win");
       attackAvailable = false;
     }
