@@ -77,6 +77,7 @@ public class GameManagerScript : MonoBehaviour
 
   public void OnWinSignal()
   {
+
     Time.timeScale = 0f;
     int nVillagersAlive = villagersManager.GetComponent<VillagerManager>().CountVillagersAlive();
     panelWin.GetComponent<VictoryPanel>().UpdateCounter(nVillagersAlive);
