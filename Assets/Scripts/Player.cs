@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    playerHealth.currentValue = playerHealth.initialValue;
+    //playerHealth.currentValue = playerHealth.initialValue;
     playerHealthSignal.Raise();
 
     myRigidbody = this.GetComponent<Rigidbody2D>();
@@ -186,6 +186,10 @@ public class Player : MonoBehaviour
         //My parry is not good
         playerHealth.currentValue -= damage;
         playerHealthSignal.Raise();
+        if (playerHealth.currentValue <= 0)
+        {
+          gameOverSignal.Raise();
+        }
       }
     }
     else
@@ -235,6 +239,26 @@ public class Player : MonoBehaviour
       shieldSprite.sortingOrder = 1;
     }
 
+
+  }
+
+  public void FullHealth()
+  {
+    playerHealth.currentValue = playerHealth.initialValue;
+    playerHealthSignal.Raise();
+  }
+
+  public void FullShield()
+  {
+    shieldHealth.currentValue = shieldHealth.initialValue;
+    shieldHealthSignal.Raise();
+  }
+
+  public void RepairShield(float amount)
+  {
+    print("amount" + amount);
+    shieldHealth.currentValue += amount;
+    shieldHealthSignal.Raise();
 
   }
 }

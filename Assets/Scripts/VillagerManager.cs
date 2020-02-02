@@ -56,8 +56,12 @@ public class VillagerManager : MonoBehaviour
 
   public void RemoveVillagerFromList()
   {
-    villToRem.go.GetComponent<BoxCollider2D>().isTrigger = false;
     villagers.list.Remove(villToRem.go);
+  }
+
+  public int CountVillagersAlive()
+  {
+    return villagers.list.Count;
   }
 
 }
