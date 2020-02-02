@@ -18,9 +18,14 @@ public class Enemy : MonoBehaviour
   [SerializeField]
   protected float cooldownAttack = 3f;
 
+  [SerializeField]
+  protected float timeBeforeDeath = 0.05f;
+
   protected bool canAttack = true;
 
   private GameObject targetObj = null;
+
+  private bool deathStarted = false;
 
 
 
@@ -60,13 +65,19 @@ public class Enemy : MonoBehaviour
     health -= damage;
     if (health <= 0)
     {
-      Death();
+      if (!deathStarted)
+      {
+        deathStarted = true;
+        StartCoroutine("DeathCo");
+      }
+
 
     }
   }
 
-  private void Death()
+  private IEnumerator DeathCo()
   {
+    yield return new WaitForSeconds(timeBeforeDeath);
     GetComponentInParent<WaveAttack>().RemoveEnemy(this.gameObject);
     Destroy(this.gameObject);
   }

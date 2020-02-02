@@ -34,9 +34,15 @@ public class VillagerScript : MonoBehaviour
 
   private bool isAlreadyDead = false;
 
+  [SerializeField]
+  private List<AudioClip> damageClips;
+
+  private AudioSource audioSource;
+
   // Start is called before the first frame update
   void Start()
   {
+    audioSource = GetComponent<AudioSource>();
     villagerNumber = (int)Random.Range(0, alive.Length);
     InitializeHealth();
 
@@ -52,6 +58,10 @@ public class VillagerScript : MonoBehaviour
   }
   public void TakeDamage(float damage)
   {
+    int index = Random.Range(0, damageClips.Count);
+    audioSource.clip = damageClips[index];
+    audioSource.Play();
+
     health -= damage;
     if (health <= 0)
     {

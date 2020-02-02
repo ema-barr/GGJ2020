@@ -78,6 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7daf521b19d3d1d43bb3d6f376b21358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrow: {fileID: 8300000, guid: 51a9dc2a70163664fa414afd64c60451, type: 3}
+  damageSounds:
+  - {fileID: 8300000, guid: b470135234900964aac453493effc1da, type: 3}
+  - {fileID: 8300000, guid: 54e1cb05a8c50784fbcaa8933387cb3f, type: 3}
+  - {fileID: 8300000, guid: e2e8242b6af691149a3d0d3cbd197ec5, type: 3}
+  - {fileID: 8300000, guid: 629c78e12d242b64391188317fd02f21, type: 3}
   bullet: {fileID: 435943312908597085, guid: aecbc006af4315e4687c976a74460d91, type: 3}
   exitPoint: {fileID: 696490717367489515}
   health: 1
