@@ -16,22 +16,8 @@ public class EnemyScript : Enemy
   {
   }
 
-  public void TakeDamage(int damage)
-  {
-    print("Enemy: " + health);
-    health -= damage;
-    if (health <= 0)
-    {
-      Death();
 
-    }
-  }
 
-  private void Death()
-  {
-    GetComponentInParent<WaveAttack>().RemoveEnemy(this.gameObject);
-    Destroy(this.gameObject);
-  }
 
 
 }

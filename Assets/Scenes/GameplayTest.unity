@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964124, b: 0.574817, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2724,8 +2724,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
         type: 3}
+      propertyPath: damageHealthClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
+      propertyPath: damageShieldClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
       propertyPath: durationParry
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
+      propertyPath: damageHealthClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 51946ae86bc78404db2471becb56ebf8, type: 3}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
+      propertyPath: damageHealthClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 691790c705ca1534a940017e6e8adef6, type: 3}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
+      propertyPath: damageHealthClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 93bb17ccf56200748920017e73ebe5d1, type: 3}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
+      propertyPath: parryClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8fdae179f48a36b439f1045c0905c2c2, type: 3}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
+      propertyPath: brokenShieldClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c1887666afee3544fa1bca5b970cae16, type: 3}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
+      propertyPath: damageShieldClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 663af43ddac239944941ef19bb9afb02, type: 3}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
+      propertyPath: damageShieldClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 57371f6f11c4d6e4ba08aabc7882e7c3, type: 3}
+    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
+        type: 3}
+      propertyPath: damageShieldClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a6d27048a0047e443877eddbbddae651, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24510f702aff74910837200610079208, type: 3}
