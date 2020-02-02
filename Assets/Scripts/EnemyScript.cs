@@ -5,9 +5,6 @@ using UnityEngine;
 public class EnemyScript : Enemy
 {
 
-
-
-
   // Start is called before the first frame update
   void Start()
   {
@@ -17,10 +14,6 @@ public class EnemyScript : Enemy
   // Update is called once per frame
   void Update()
   {
-    /*if (Input.GetKeyDown("space"))
-    {
-        Instantiate(bullet,EnTrans);
-    }*/
   }
 
   public void TakeDamage(int damage)

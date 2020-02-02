@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  speed: 15
+  speed: 7
   delayKillBullet: 20
+  target: {fileID: 0}
 --- !u!50 &5672781261292587106
 Rigidbody2D:
   serializedVersion: 4

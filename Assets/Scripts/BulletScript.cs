@@ -31,7 +31,7 @@ public class BulletScript : MonoBehaviour
 
     //DO SHIT HERE, FOR FUCK SAKE
     //damage = 
-    //Destroy(gameObject, delayKillBullet);
+    Destroy(gameObject, delayKillBullet);
   }
 
   // Update is called once per frame

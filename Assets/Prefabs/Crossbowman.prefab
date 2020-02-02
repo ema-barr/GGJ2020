@@ -167,7 +167,7 @@ MonoBehaviour:
   bullet: {fileID: 2853198996764918617, guid: e965d8de6d3fa5b4d989016004a4a213, type: 3}
   exitPoint: {fileID: 599846958546043689}
   health: 2
-  enemyHealthSignal: {fileID: 0}
+  cooldownAttack: 4
 --- !u!1 &599846958546043689
 GameObject:
   m_ObjectHideFlags: 0

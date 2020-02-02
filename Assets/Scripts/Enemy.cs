@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     canAttack = false;
 
     print("Target" + targetObj);
-    GameObject bullObj = Instantiate(bullet, exitPoint.transform);
+    GameObject bullObj = (GameObject)Instantiate(bullet, exitPoint.transform);
     bullObj.GetComponent<BulletScript>().SetTarget(targetObj);
     yield return new WaitForSeconds(cooldownAttack);
     canAttack = true;

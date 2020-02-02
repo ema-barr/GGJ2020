@@ -33,6 +33,7 @@ public class WaveAttack : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+
     attackAvailable = false;
     numEnemies = enemyPrefabs.Length;
     StartCoroutine("InitializationCo");
@@ -59,57 +60,76 @@ public class WaveAttack : MonoBehaviour
     {
       //StartCoroutine("AttackCo2");
       attackAvailable = false;
-      Attack();
-      attackAvailable = true;
+      StartCoroutine("Attack3");
     }
   }
 
-  private void Attack()
+  private IEnumerator Attack3()
   {
+
     int index = Random.Range(0, enemies.Count);
     if (listVillagers.list.Count > 0)
     {
+      print("Index: " + index);
       int indexVillAttack = -1;
-      indexVillAttack = Mathf.Min(index, listVillagers.list.Count - 1);
-      enemies[index].GetComponent<Enemy>().Attack(listVillagers.list[indexVillAttack]);
-    }
-
-
-  }
-
-
-  private IEnumerator AttackCo()
-  {
-    attackAvailable = false;
-    activeEnemies = enemies.Count;
-    int index = Random.Range(0, activeEnemies);
-    print(index);
-    if (listVillagers.list.Count > 0)
-    {
-      int indexVillAttack = -1;
+      bool crossbow = false;
       if (enemies[index].GetComponent<Crossbowman>() != null)
       {
-        indexVillAttack = Random.Range(0, listVillagers.list.Count - 1);
-        enemies[index].GetComponent<Crossbowman>().Attack(listVillagers.list[indexVillAttack]);
+        crossbow = true;
+      }
+
+      if (crossbow)
+      {
+        indexVillAttack = Random.Range(0, listVillagers.list.Count);
       }
       else
       {
         indexVillAttack = Mathf.Min(index, listVillagers.list.Count - 1);
-        enemies[index].GetComponent<EnemyScript>().Attack(listVillagers.list[indexVillAttack]);
       }
 
-      yield return new WaitForSeconds(timeDelay * Time.deltaTime);
+      enemies[index].GetComponent<Enemy>().Attack(listVillagers.list[indexVillAttack]);
+      yield return new WaitForSeconds(timeDelay);
+
+      attackAvailable = true;
 
     }
-    attackAvailable = true;
+
+
   }
+
+  /*
+    private IEnumerator AttackCo()
+    {
+      attackAvailable = false;
+      activeEnemies = enemies.Count;
+      int index = Random.Range(0, activeEnemies);
+      print(index);
+      if (listVillagers.list.Count > 0)
+      {
+        int indexVillAttack = -1;
+        if (enemies[index].GetComponent<Crossbowman>() != null)
+        {
+          indexVillAttack = Random.Range(0, listVillagers.list.Count - 1);
+          enemies[index].GetComponent<Crossbowman>().Attack(listVillagers.list[indexVillAttack]);
+        }
+        else
+        {
+          indexVillAttack = Mathf.Min(index, listVillagers.list.Count - 1);
+          enemies[index].GetComponent<EnemyScript>().Attack(listVillagers.list[indexVillAttack]);
+        }
+
+        yield return new WaitForSeconds(timeDelay * Time.deltaTime);
+
+      }
+      attackAvailable = true;
+    }*/
 
   public void RemoveEnemy(GameObject enemy)
   {
     enemies.Remove(enemy);
     if (enemies.Count == 0)
     {
-      StopCoroutine("AttackCo");
+      StopCoroutine("Attack3");
       print("Win");
       attackAvailable = false;
     }

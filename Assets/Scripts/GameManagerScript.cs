@@ -11,7 +11,7 @@ public class GameManagerScript : MonoBehaviour
   private Signal initializationComplete;
 
   // Start is called before the first frame update
-  void Start()
+  void Awake()
   {
     initializationEnemies = false;
     initializationVillagers = false;
