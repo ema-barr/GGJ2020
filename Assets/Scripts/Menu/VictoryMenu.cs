@@ -22,6 +22,6 @@ public class VictoryMenu : MonoBehaviour
   public void NextLevel()
   {
     SceneManager.LoadScene(nextLevelName);
-
+    Time.timeScale = 1f;
   }
 }

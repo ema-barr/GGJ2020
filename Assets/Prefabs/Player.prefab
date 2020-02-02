@@ -176,11 +176,15 @@ MonoBehaviour:
     type: 3}
   gameOverSignal: {fileID: 11400000, guid: 08b0abd3c5b87455baa58978facd7835, type: 2}
   delayStartParry: 0.2
-  durationParry: 1
+  durationParry: 0.3
   recoveryParry: 0.2
   isParrying: 0
   parryReady: 0
   speed: 10
+  damageHealthClips: []
+  damageShieldClips: []
+  parryClip: {fileID: 0}
+  brokenShieldClip: {fileID: 0}
 --- !u!50 &3613249812969881948
 Rigidbody2D:
   serializedVersion: 4
