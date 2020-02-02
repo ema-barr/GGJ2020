@@ -48,6 +48,9 @@ MonoBehaviour:
   initialHealth: 1
   villagerDeath: {fileID: 11400000, guid: d3c3da3d45b3347ecbf33c1b94da7607, type: 2}
   villagerToRem: {fileID: 11400000, guid: a531c5e78bcc247a39b4a492be7cbffe, type: 2}
+  deadAndHappyHead: {fileID: 21300000, guid: 70887995294324a69a495d9a6112d7c8, type: 3}
+  justDead: {fileID: 21300000, guid: 638da1a11d0fc4d4098066567ea20025, type: 3}
+  timeHeadStaysUpWhenDeathComes: 2
 --- !u!61 &1664146150386735291
 BoxCollider2D:
   m_ObjectHideFlags: 0
