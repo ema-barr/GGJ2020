@@ -27,6 +27,9 @@ public class WaveAttack : MonoBehaviour
 
   private bool attackAvailable;
 
+  [SerializeField]
+  private Signal winSignal;
+
 
 
 
@@ -103,7 +106,7 @@ public class WaveAttack : MonoBehaviour
     if (enemies.Count == 0)
     {
       StopCoroutine("AttackCo");
-      print("Win");
+      winSignal.Raise();
       attackAvailable = false;
     }
   }
