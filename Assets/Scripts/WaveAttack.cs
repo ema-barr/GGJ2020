@@ -14,7 +14,7 @@ public class WaveAttack : MonoBehaviour
   [SerializeField]
   private GameObject[] enemyPrefabs;
 
-  [SerializeField]
+
   private int numEnemies;
 
   private int activeEnemies;
@@ -34,6 +34,7 @@ public class WaveAttack : MonoBehaviour
   void Start()
   {
     attackAvailable = false;
+    numEnemies = enemyPrefabs.Length;
     StartCoroutine("InitializationCo");
   }
 
@@ -56,9 +57,26 @@ public class WaveAttack : MonoBehaviour
 
     if (attackAvailable)
     {
-      StartCoroutine("AttackCo");
+      //StartCoroutine("AttackCo2");
+      attackAvailable = false;
+      Attack();
+      attackAvailable = true;
     }
   }
+
+  private void Attack()
+  {
+    int index = Random.Range(0, enemies.Count);
+    if (listVillagers.list.Count > 0)
+    {
+      int indexVillAttack = -1;
+      indexVillAttack = Mathf.Min(index, listVillagers.list.Count - 1);
+      enemies[index].GetComponent<Enemy>().Attack(listVillagers.list[indexVillAttack]);
+    }
+
+
+  }
+
 
   private IEnumerator AttackCo()
   {

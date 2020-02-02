@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+public class EnemyScript : Enemy
 {
-  public GameObject bullet;
-  [SerializeField]
-  private GameObject exitPoint;
 
-  [SerializeField]
-  private int health;
 
 
 
@@ -45,10 +40,5 @@ public class EnemyScript : MonoBehaviour
     Destroy(this.gameObject);
   }
 
-  public void Attack(GameObject target)
-  {
-    print("Target" + target);
-    GameObject bullObj = Instantiate(bullet, exitPoint.transform);
-    bullObj.GetComponent<BulletScript>().SetTarget(target);
-  }
+
 }

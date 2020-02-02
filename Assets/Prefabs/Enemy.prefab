@@ -79,7 +79,7 @@ MonoBehaviour:
   bullet: {fileID: 435943312908597085, guid: aecbc006af4315e4687c976a74460d91, type: 3}
   exitPoint: {fileID: 696490717367489515}
   health: 1
-  enemyHealthSignal: {fileID: 0}
+  cooldownAttack: 1
 --- !u!61 &696490717580401351
 BoxCollider2D:
   m_ObjectHideFlags: 0
