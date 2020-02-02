@@ -88,6 +88,7 @@ MonoBehaviour:
   exitPoint: {fileID: 696490717367489515}
   health: 1
   cooldownAttack: 0.5
+  timeBeforeDeath: 0.1
 --- !u!61 &696490717580401351
 BoxCollider2D:
   m_ObjectHideFlags: 0
