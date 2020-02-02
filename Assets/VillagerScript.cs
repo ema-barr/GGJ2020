@@ -13,13 +13,24 @@ public class VillagerScript : MonoBehaviour
   [SerializeField]
   private ElementToRem villagerToRem;
 
-  private float health = 1;
+    [SerializeField]
+    private Sprite deadAndHappyHead;
+    [SerializeField]
+    private Sprite justDead;
+
+    private SpriteRenderer villagerSprite;
+
+    [SerializeField]
+    private float timeHeadStaysUpWhenDeathComes = 2;
+
+    private float health = 1;
 
   // Start is called before the first frame update
   void Start()
   {
     InitializeHealth();
-  }
+        villagerSprite = GetComponentInChildren<SpriteRenderer>();
+    }
 
   // Update is called once per frame
   void Update()
@@ -34,7 +45,10 @@ public class VillagerScript : MonoBehaviour
 
       villagerToRem.go = this.gameObject;
       villagerDeath.Raise();
-      Destroy(this.gameObject);
+
+            //call iEnumerator "DeathAnimation"
+            StartCoroutine("DeathAnimation");
+//            Destroy(this.gameObject);
     }
 
   }
@@ -43,4 +57,23 @@ public class VillagerScript : MonoBehaviour
   {
     health = (float)initialHealth;
   }
-}
+
+    private IEnumerator DeathAnimation()
+    {
+        print("I'm Dying, you cruel world!");
+        //head pops up and collider fucks off
+        villagerSprite.sprite = deadAndHappyHead;
+        transform.localScale += new Vector3(+0.3f, +0.3f, +0.3f);
+        
+            yield return new WaitForSeconds(timeHeadStaysUpWhenDeathComes);
+            print("I'm dead, you cunt!");
+        //dead body pops up
+        villagerSprite.sprite = justDead;
+        villagerSprite.color = new Vector4(1f, 1f, 1f, 0.75f);
+        transform.localScale -= new Vector3(+0.3f, +0.3f, +0.3f);
+
+
+    }
+
+    }
+
