@@ -40,4 +40,14 @@ public class GameManagerScript : MonoBehaviour
       initializationComplete.Raise();
     }
   }
+
+  public void OnGameOverSignal()
+  {
+
+  }
+
+  public void OnWinSignal()
+  {
+
+  }
 }

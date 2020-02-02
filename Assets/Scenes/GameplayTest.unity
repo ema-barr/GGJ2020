@@ -715,6 +715,82 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1026779709}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &577335566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3393011160994884110, guid: c2293ac0be4b8472d99309756d36f727,
+    type: 3}
+  m_PrefabInstance: {fileID: 3393011160959458556}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &577335567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577335566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c314fd7deac1a401ebee708eb8403ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 5e0f006bcc1e5450b9008a9002b8e721, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 577335569}
+        m_MethodName: OnWinSignal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &577335568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577335566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c314fd7deac1a401ebee708eb8403ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 08b0abd3c5b87455baa58978facd7835, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 577335569}
+        m_MethodName: OnGameOverSignal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &577335569 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3393011160994884106, guid: c2293ac0be4b8472d99309756d36f727,
+    type: 3}
+  m_PrefabInstance: {fileID: 3393011160959458556}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577335566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe4ea032ec89f40c28a1fd697e64d572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &588400320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,11 +2126,23 @@ PrefabInstance:
       propertyPath: timeDelay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3393011161369832089, guid: c2293ac0be4b8472d99309756d36f727,
+        type: 3}
+      propertyPath: winSignal
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e0f006bcc1e5450b9008a9002b8e721,
+        type: 2}
     - target: {fileID: 3393011161376258790, guid: c2293ac0be4b8472d99309756d36f727,
         type: 3}
       propertyPath: numVillagers
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3393011161376258790, guid: c2293ac0be4b8472d99309756d36f727,
+        type: 3}
+      propertyPath: gameOverSignal
+      value: 
+      objectReference: {fileID: 11400000, guid: 08b0abd3c5b87455baa58978facd7835,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2293ac0be4b8472d99309756d36f727, type: 3}
 --- !u!1001 &3613249813330496615
@@ -2123,61 +2211,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: durationParry
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: delayStartParry
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249812969881949, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: recoveryParry
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249814366771323, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249812465642570, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249812465642571, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249814366771321, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249814366771321, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.0027497225
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249814366771321, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.08212576
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249814366771321, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.005181674
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613249814366771321, guid: 24510f702aff74910837200610079208,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.086437605
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24510f702aff74910837200610079208, type: 3}

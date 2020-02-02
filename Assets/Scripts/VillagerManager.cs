@@ -22,6 +22,9 @@ public class VillagerManager : MonoBehaviour
   [SerializeField]
   private Signal initializationSignal;
 
+  [SerializeField]
+  private Signal gameOverSignal;
+
 
   // Start is called before the first frame update
   void Start()
@@ -33,7 +36,10 @@ public class VillagerManager : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-
+    if (villagers.list.Count <= 0)
+    {
+      gameOverSignal.Raise();
+    }
   }
 
   private IEnumerator InitializationCo()
@@ -50,6 +56,7 @@ public class VillagerManager : MonoBehaviour
 
   public void RemoveVillagerFromList()
   {
+    villToRem.go.GetComponent<BoxCollider2D>().isTrigger = false;
     villagers.list.Remove(villToRem.go);
   }
 

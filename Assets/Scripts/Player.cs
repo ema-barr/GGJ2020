@@ -21,40 +21,43 @@ public class Player : MonoBehaviour
   [SerializeField]
   private FloatValue shieldHealth;
 
-    [SerializeField]
-    private GameObject shield;
-    [SerializeField]
+  [SerializeField]
+  private GameObject shield;
+  [SerializeField]
   private Sprite shieldParry;
-    [SerializeField]
-    private Sprite shieldParryBroken;
-    [SerializeField]
-    private Sprite shieldParryDestroyed;
+  [SerializeField]
+  private Sprite shieldParryBroken;
+  [SerializeField]
+  private Sprite shieldParryDestroyed;
 
-//there's no art for this
-    [SerializeField]
-    private Sprite shieldCharging;
-    //there's no art for this
-    [SerializeField]
-    private Sprite shieldChargingBroken;
-    //there's no art for this
-    [SerializeField]
-    private Sprite shieldChargingDestroyed;
+  //there's no art for this
+  [SerializeField]
+  private Sprite shieldCharging;
+  //there's no art for this
+  [SerializeField]
+  private Sprite shieldChargingBroken;
+  //there's no art for this
+  [SerializeField]
+  private Sprite shieldChargingDestroyed;
 
-    [SerializeField]
-    private Sprite shieldRebound;
-    [SerializeField]
-    private Sprite shieldReboundBroken;
-    [SerializeField]
-    private Sprite shieldReboundDestroyed;
-    [SerializeField]
-    private Sprite shieldRest;
-    [SerializeField]
-    private Sprite shieldRestBroken;
-    [SerializeField]
-    private Sprite shieldRestDestroyed;
+  [SerializeField]
+  private Sprite shieldRebound;
+  [SerializeField]
+  private Sprite shieldReboundBroken;
+  [SerializeField]
+  private Sprite shieldReboundDestroyed;
+  [SerializeField]
+  private Sprite shieldRest;
+  [SerializeField]
+  private Sprite shieldRestBroken;
+  [SerializeField]
+  private Sprite shieldRestDestroyed;
+
+  [SerializeField]
+  private Signal gameOverSignal;
 
 
-    [SerializeField]
+  [SerializeField]
   private float delayStartParry;
   [SerializeField]
   private float durationParry;
@@ -80,11 +83,11 @@ public class Player : MonoBehaviour
 
     shieldSprite = GetComponentInChildren<SpriteRenderer>();
 
-        updatableShield = true;
+    updatableShield = true;
     isParrying = false;
     parryReady = true;
-        ChangeShieldSprite(shieldRest);
-    }
+    ChangeShieldSprite(shieldRest);
+  }
 
   // Update is called once per frame
   void Update()
@@ -109,29 +112,29 @@ public class Player : MonoBehaviour
     if (!isParrying)
     {
       parryReady = false;
-            //Rebound (should be "Charging", but ain't got no art for that) shield sprite che ho commentato perche sti cazzi
-//            ChangeShieldSprite(shieldRebound);
+      //Rebound (should be "Charging", but ain't got no art for that) shield sprite che ho commentato perche sti cazzi
+      //            ChangeShieldSprite(shieldRebound);
 
-            yield return new WaitForSeconds(delayStartParry);
+      yield return new WaitForSeconds(delayStartParry);
       print("Start parry");
       isParrying = true;
-            //Parrying shield sprite
-            ChangeShieldSprite(shieldParry);
+      //Parrying shield sprite
+      ChangeShieldSprite(shieldParry);
 
       yield return new WaitForSeconds(durationParry);
       isParrying = false;
-            //Rebound shield sprite che ho commentato perche sti cazzi
-//            ChangeShieldSprite(shieldRebound);
+      //Rebound shield sprite che ho commentato perche sti cazzi
+      //            ChangeShieldSprite(shieldRebound);
 
-            print("End parry");
+      print("End parry");
       yield return new WaitForSeconds(recoveryParry);
       parryReady = true;
-            //resting shield sprite
-            ChangeShieldSprite(shieldRest);
-
-        }
+      //resting shield sprite
+      ChangeShieldSprite(shieldRest);
 
     }
+
+  }
 
 
   private void GetMovement()
@@ -205,6 +208,7 @@ public class Player : MonoBehaviour
           updatableShield = false;
           shield.SetActive(false);
           parryReady = false;
+          gameOverSignal.Raise();
         }
       }
 
@@ -212,25 +216,25 @@ public class Player : MonoBehaviour
 
     print("Shield: " + shieldHealth.currentValue);
     print("Health: " + playerHealth.currentValue);
-        if (playerHealth.currentValue <= 0)
-        {
-            SceneManager.LoadScene("GameOver");
-        }
+    if (playerHealth.currentValue <= 0)
+    {
+      SceneManager.LoadScene("GameOver");
+    }
 
   }
 
-    public void ChangeShieldSprite(Sprite sprite)
+  public void ChangeShieldSprite(Sprite sprite)
+  {
+    shieldSprite.sprite = sprite;
+    if (sprite == shieldRest || sprite == shieldRestBroken || sprite == shieldRestDestroyed)
     {
-        shieldSprite.sprite = sprite;
-        if (sprite == shieldRest || sprite == shieldRestBroken || sprite == shieldRestDestroyed)
-        {
-            shieldSprite.sortingOrder = -1;
-        }
-        if (sprite == shieldParry || sprite == shieldRebound || sprite == shieldParryBroken || sprite == shieldParryDestroyed || sprite == shieldReboundBroken || sprite == shieldReboundDestroyed)
-        {
-            shieldSprite.sortingOrder = 1;
-        }
-
-
+      shieldSprite.sortingOrder = -1;
     }
+    if (sprite == shieldParry || sprite == shieldRebound || sprite == shieldParryBroken || sprite == shieldParryDestroyed || sprite == shieldReboundBroken || sprite == shieldReboundDestroyed)
+    {
+      shieldSprite.sortingOrder = 1;
+    }
+
+
+  }
 }
