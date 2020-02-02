@@ -64,7 +64,7 @@ public class BulletScript : MonoBehaviour
 
   private void OnTriggerEnter2D(Collider2D other)
   {
-        transform.rotation = Quaternion.AngleAxis(0, Vector3.back); ;
+    transform.rotation = Quaternion.AngleAxis(0, Vector3.back); ;
     if (other.CompareTag("Player"))
     {
       other.GetComponentInParent<Player>().TakeDamage(1);
@@ -72,20 +72,26 @@ public class BulletScript : MonoBehaviour
     }
     else if (other.CompareTag("Enemy"))
     {
-      if (other.GetComponent<EnemyScript>() != null)
-      {
-        other.GetComponent<EnemyScript>().TakeDamage(1);
-      }
-      else if (other.GetComponent<Crossbowman>())
-      {
-        other.GetComponent<Crossbowman>().TakeDamage(1);
-      }
+      other.GetComponent<Enemy>().TakeDamage(1);
+      /*
+        if (other.GetComponent<EnemyScript>() != null)
+        {
+          other.GetComponent<Enemy>().TakeDamage(1);
+        }
+        else if (other.GetComponent<Crossbowman>())
+        {
+          other.GetComponent<Enemy>().TakeDamage(1);
+        }*/
       Destroy(this.gameObject);
     }
     else if (other.CompareTag("Shield"))
     {
       if (other.GetComponentInParent<Player>().isParrying)
+      {
         direction = transform.position - target.transform.position;
+        GameObject go = GameObject.FindWithTag("Knight");
+        go.gameObject.GetComponent<Player>().PlayParrySound();
+      }
       else
       {
         other.GetComponentInParent<Player>().TakeDamage(damage);

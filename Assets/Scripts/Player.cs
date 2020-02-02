@@ -72,10 +72,23 @@ public class Player : MonoBehaviour
 
   private SpriteRenderer shieldSprite;
 
+  [SerializeField]
+  private List<AudioClip> damageHealthClips;
+  [SerializeField]
+  private List<AudioClip> damageShieldClips;
+  [SerializeField]
+  private AudioClip parryClip;
+  [SerializeField]
+  private AudioClip brokenShieldClip;
+
+  private AudioSource audioSource;
+
+
 
   // Start is called before the first frame update
   void Start()
   {
+    audioSource = GetComponent<AudioSource>();
     //playerHealth.currentValue = playerHealth.initialValue;
     playerHealthSignal.Raise();
 
@@ -111,6 +124,7 @@ public class Player : MonoBehaviour
     print("Parrying");
     if (!isParrying)
     {
+
       parryReady = false;
       //Rebound (should be "Charging", but ain't got no art for that) shield sprite che ho commentato perche sti cazzi
       //            ChangeShieldSprite(shieldRebound);
@@ -136,6 +150,11 @@ public class Player : MonoBehaviour
 
   }
 
+  public void PlayParrySound()
+  {
+    audioSource.clip = parryClip;
+    audioSource.Play();
+  }
 
   private void GetMovement()
   {
@@ -180,9 +199,12 @@ public class Player : MonoBehaviour
   {
     if (!parryReady)
     {
-      //I'm parrying or my shield is broken
+      //I'm bad in parrying or my shield is broken
       if (!isParrying)
       {
+        int index = Random.Range(0, damageHealthClips.Count);
+        audioSource.clip = damageHealthClips[index];
+        audioSource.Play();
         //My parry is not good
         playerHealth.currentValue -= damage;
         playerHealthSignal.Raise();
@@ -197,18 +219,30 @@ public class Player : MonoBehaviour
       //I'm not parrying
       if (shieldHealth.currentValue <= 0)
       {
+        int index = Random.Range(0, damageHealthClips.Count);
+        audioSource.clip = damageHealthClips[index];
+        audioSource.Play();
         //I have no shield
         playerHealth.currentValue -= damage;
         playerHealthSignal.Raise();
+        if (playerHealth.currentValue <= 0)
+        {
+          gameOverSignal.Raise();
+        }
         //CheckDeath();
       }
       else if (shieldHealth.currentValue > 0)
       {
+        int index = Random.Range(0, damageShieldClips.Count);
+        audioSource.clip = damageShieldClips[index];
+        audioSource.Play();
         //I'm defending only with my shield
         shieldHealth.currentValue -= damage;
         shieldHealthSignal.Raise();
         if (shieldHealth.currentValue <= 0)
         {
+          audioSource.clip = brokenShieldClip;
+          audioSource.Play();
           updatableShield = false;
           shield.SetActive(false);
           parryReady = false;
