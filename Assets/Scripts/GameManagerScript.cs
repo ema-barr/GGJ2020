@@ -8,7 +8,24 @@ public class GameManagerScript : MonoBehaviour
   private bool initializationVillagers;
 
   [SerializeField]
+  private GameObject villagersManager;
+
+  [SerializeField]
+  private GameObject player;
+
+
+  [SerializeField]
+  private GameObject panelWin;
+  [SerializeField]
+  private GameObject panelGameOver;
+
+  [SerializeField]
   private Signal initializationComplete;
+
+  [SerializeField]
+  private float secondsToStart = 0.0f;
+
+  private bool initializationCompleteStarted = false;
 
   // Start is called before the first frame update
   void Awake()
@@ -28,7 +45,11 @@ public class GameManagerScript : MonoBehaviour
     initializationEnemies = true;
     if (initializationVillagers)
     {
-      initializationComplete.Raise();
+      if (!initializationCompleteStarted)
+      {
+        initializationCompleteStarted = true;
+        StartCoroutine("InitializationCompleteCo");
+      }
     }
   }
 
@@ -37,7 +58,36 @@ public class GameManagerScript : MonoBehaviour
     initializationVillagers = true;
     if (initializationEnemies)
     {
-      initializationComplete.Raise();
+      if (!initializationCompleteStarted)
+      {
+        initializationCompleteStarted = true;
+        StartCoroutine("InitializationCompleteCo");
+      }
     }
+  }
+
+  public void OnGameOverSignal()
+  {
+    //Time.timeScale = 0f;
+    panelGameOver.SetActive(true);
+    player.GetComponent<Player>().FullHealth();
+    player.GetComponent<Player>().FullShield();
+
+  }
+
+  public void OnWinSignal()
+  {
+    Time.timeScale = 0f;
+    int nVillagersAlive = villagersManager.GetComponent<VillagerManager>().CountVillagersAlive();
+    panelWin.GetComponent<VictoryPanel>().UpdateCounter(nVillagersAlive);
+    panelWin.SetActive(true);
+    player.GetComponent<Player>().FullHealth();
+    player.GetComponent<Player>().RepairShield(nVillagersAlive);
+  }
+
+  private IEnumerator InitializationCompleteCo()
+  {
+    yield return new WaitForSeconds(secondsToStart);
+    initializationComplete.Raise();
   }
 }
