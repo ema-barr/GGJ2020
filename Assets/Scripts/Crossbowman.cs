@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyScript : Enemy
+public class Crossbowman : Enemy
 {
 
   // Start is called before the first frame update
@@ -32,6 +32,9 @@ public class EnemyScript : Enemy
     GetComponentInParent<WaveAttack>().RemoveEnemy(this.gameObject);
     Destroy(this.gameObject);
   }
+
+
+
 
 
 }

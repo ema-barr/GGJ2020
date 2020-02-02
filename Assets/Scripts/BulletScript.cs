@@ -31,7 +31,7 @@ public class BulletScript : MonoBehaviour
 
     //DO SHIT HERE, FOR FUCK SAKE
     //damage = 
-    //Destroy(gameObject, delayKillBullet);
+    Destroy(gameObject, delayKillBullet);
   }
 
   // Update is called once per frame
@@ -71,7 +71,14 @@ public class BulletScript : MonoBehaviour
     }
     else if (other.CompareTag("Enemy"))
     {
-      other.GetComponent<EnemyScript>().TakeDamage(1);
+      if (other.GetComponent<EnemyScript>() != null)
+      {
+        other.GetComponent<EnemyScript>().TakeDamage(1);
+      }
+      else if (other.GetComponent<Crossbowman>())
+      {
+        other.GetComponent<Crossbowman>().TakeDamage(1);
+      }
       Destroy(this.gameObject);
     }
     else if (other.CompareTag("Shield"))

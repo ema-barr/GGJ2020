@@ -102,9 +102,9 @@ GameObject:
   m_Component:
   - component: {fileID: 599846958333102596}
   - component: {fileID: 599846958333102597}
-  - component: {fileID: 3977223668352088362}
+  - component: {fileID: 514965859266593537}
   m_Layer: 0
-  m_Name: Balestriere
+  m_Name: Crossbowman
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3977223668352088362
+--- !u!114 &514965859266593537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,14 +161,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 599846958333102598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 425e11d4b9f6fce45aedf1c840d1cf51, type: 3}
+  m_Script: {fileID: 11500000, guid: 00c9645e762f940608a7887b8cf9f1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2853198996764918617, guid: e965d8de6d3fa5b4d989016004a4a213, type: 3}
   exitPoint: {fileID: 599846958546043689}
-  damage: 1
-  health: 1
-  enemyHealthSignal: {fileID: 0}
+  health: 2
+  cooldownAttack: 4
 --- !u!1 &599846958546043689
 GameObject:
   m_ObjectHideFlags: 0
