@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76915c891b6c249888f75adf4f757dc7, type: 3}
   m_Name: shieldHealth
   m_EditorClassIdentifier: 
-  initialValue: 4
-  currentValue: 4
+  initialValue: 5
+  currentValue: 5
