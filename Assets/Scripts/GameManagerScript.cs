@@ -8,6 +8,9 @@ public class GameManagerScript : MonoBehaviour
   private bool initializationVillagers;
 
   [SerializeField]
+  private ListGameObjects listVillagers;
+
+  [SerializeField]
   private GameObject villagersManager;
 
   [SerializeField]
@@ -68,7 +71,7 @@ public class GameManagerScript : MonoBehaviour
 
   public void OnGameOverSignal()
   {
-    Time.timeScale = 0f;
+
     panelGameOver.SetActive(true);
     player.GetComponent<Player>().FullHealth();
     player.GetComponent<Player>().FullShield();
@@ -77,8 +80,6 @@ public class GameManagerScript : MonoBehaviour
 
   public void OnWinSignal()
   {
-
-    Time.timeScale = 0f;
     int nVillagersAlive = villagersManager.GetComponent<VillagerManager>().CountVillagersAlive();
     panelWin.GetComponent<VictoryPanel>().UpdateCounter(nVillagersAlive);
     panelWin.SetActive(true);

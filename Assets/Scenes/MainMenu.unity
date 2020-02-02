@@ -1328,7 +1328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ab0f69501c64506813634504f9090f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newGameScene: Level1
+  newGameScene: Tutorial
   creditsScene: Credits
 --- !u!4 &1667907273
 Transform:

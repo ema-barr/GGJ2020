@@ -29,6 +29,7 @@ public class VillagerManager : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
+    villagers.list = new List<GameObject>();
     StartCoroutine("InitializationCo");
 
   }
