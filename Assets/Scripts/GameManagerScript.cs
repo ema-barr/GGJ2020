@@ -78,8 +78,9 @@ public class GameManagerScript : MonoBehaviour
   public void OnWinSignal()
   {
     Time.timeScale = 0f;
+    int nVillagersAlive = villagersManager.GetComponent<VillagerManager>().CountVillagersAlive();
+    panelWin.GetComponent<VictoryPanel>().UpdateCounter(nVillagersAlive);
     panelWin.SetActive(true);
-    float nVillagersAlive = villagersManager.GetComponent<VillagerManager>().CountVillagersAlive();
     player.GetComponent<Player>().FullHealth();
     player.GetComponent<Player>().RepairShield(nVillagersAlive);
   }
